@@ -45,34 +45,33 @@
     Electron.IpcMain.Send(mainWindow, "excel-file-created", resultFromTypeScript);
 });</code>
                     </pre>
-                    <h5>index.ts from ElectronHostHook-Folder (TypeScript)</h5>
+                    <h5>来自ElectronHostHook文件夹的index.ts（TypeScript）</h5>
                     <pre>
                     <code class="typescript">
-                            import * as Electron from "electron";
-                            import { Connector } from "./connector";
-                            import { ExcelCreator } from "./excelCreator";
+import * as Electron from "electron";
+import { Connector } from "./connector";
+import { ExcelCreator } from "./excelCreator";
 
-                            export class HookService extends Connector {
-                            constructor(socket: SocketIO.Socket, public app: Electron.App) {
-                            super(socket, app);
-                            }
+export class HookService extends Connector {
+    constructor(socket: SocketIO.Socket, public app: Electron.App) {
+        super(socket, app);
+    }
 
-                            onHostReady(): void {
-                            // 在这里执行您自己的JavaScript业务逻辑
-                            this.on("create-excel", async (path, done) => {
-                            const excelCreator: ExcelCreator = new ExcelCreator();
-                            const result: string = await excelCreator.create(path);
+    onHostReady(): void {
+        // 在这里执行您自己的JavaScript业务逻辑
+        this.on("create-excel", async (path, done) => {
+            const excelCreator: ExcelCreator = new ExcelCreator();
+            const result: string = await excelCreator.create(path);
 
-                            done(result);
-                            });
-                            }
-                            }
+            done(result);
+        });
+    }
+}
                         </code>
                     </pre>
                 </div>
             </div>
         </div>
-
         <script>
             (function () {
                 const { ipcRenderer } = require("electron");
