@@ -30,13 +30,13 @@ $ electronize start
 
 ## 👩‍🏫 在新项目中使用Electron.NET
 
-请在您的ASP.NET Core应用程序中安装[ElectronNET.API NuGet package]
+请在您的ASP.NET Core应用程序中使用NuGet安装 [ElectronNET.API](https://www.nuget.org/packages/ElectronNET.API/) 包
 ````
 PM> Install-Package ElectronNET.API
 ````
 ### Program.cs
 
-使用“UseElectron”WebHostBuilder扩展名启动Electron.NET。
+在WebHostBuilder节点添加“UseElectron”以启动Electron.NET。
 
 ```csharp
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -50,7 +50,7 @@ PM> Install-Package ElectronNET.API
 
 ### Startup.cs
 
-在Startup.cs文件中配置Electron的启动窗口: 
+在Startup.cs文件中配置Electron的启动窗口:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
