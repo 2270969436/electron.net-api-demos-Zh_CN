@@ -4,29 +4,30 @@
             <div class="section-wrapper">
                 <h1>
                     <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
-                    Communication between processes
+                    在进程间通讯
                 </h1>
-                <h3>The <code>ipc</code> (inter-process communication) module allows you to send and receive synchronous and asynchronous messages between the main and renderer processes.</h3>
+                <h3>通过 <code>ipc</code>（进程间通信）模块允许您在主进程和渲染进程之间发送和接收同步和异步消息.</h3>
 
-                <p>There is a version of this module available for both processes: <code>Electron.IpcMain</code> and <code>ipcRenderer</code>.</p>
-                <p>You find the sample source code in <code>Controllers\IpcController.cs</code>.</p>
+                <p>这个模块有一个版本可用于这两个进程: <code>Electron.IpcMain</code> 和 <code>ipcRenderer</code>.</p>
+                <p>您可以在<code>Controllers\IpcController.cs</code>中找到示例源代码.</p>
             </div>
         </header>
 
         <div class="demo">
             <div class="demo-wrapper">
                 <button id="async-msg-demo-toggle" class="js-container-target demo-toggle-button">
-                    Asynchronous messages
-                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+                    异步消息
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Both</div>
                 </button>
                 <div class="demo-box">
                     <div class="demo-controls">
                         <button class="demo-button" id="async-msg">Ping</button>
                         <span class="demo-response" id="async-reply"></span>
                     </div>
-                    <p>Using <code>ipcRenderer</code> to send messages between processes asynchronously is the preferred method since it will return when finished without blocking other operations in the same process.</p>
+                    <p>使用 <code>ipcRenderer</code> 以异步方式在进程之间发送消息是首选方法, 因为它会在完成时返回, 而不会阻止同一进程中的其他操作.</p>
 
-                    <p>This example sends a "ping" from this process (renderer) to the main process. The main process then replies with "pong".</p>
+                    <p>此示例将从此进程（渲染器）发送异步消息 "Ping" 到主进程, 然后主进程回答 "Pong".</p>
+
                     <h5>渲染进程 (JavaScript)</h5>
                     <pre><code class="javascript">const { ipcRenderer } = require("electron");
 
@@ -51,16 +52,17 @@ ipcRenderer.on('asynchronous-reply', (event, arg) => {
         <div class="demo">
             <div class="demo-wrapper">
                 <button id="sync-msg-demo-toggle" class="js-container-target demo-toggle-button">
-                    Synchronous messages
-                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+                    同步消息
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Both</div>
                 </button>
                 <div class="demo-box">
                     <div class="demo-controls">
                         <button class="demo-button" id="sync-msg">Ping</button>
                         <span class="demo-response" id="sync-reply"></span>
                     </div>
-                    <p>You can use the <code>ipcRenderer</code> module to send synchronous messages between processes as well, but note that the synchronous nature of this method means that it <b>will block</b> other operations while completing its task.</p>
-                    <p>This example sends a synchronous message, "ping", from this process (renderer) to the main process. The main process then replies with "pong".</p>
+                    <p>您可以使用 <code>ipcRenderer</code> 模块在进程之间发送同步消息. 但请注意, 此方法的同步特性意味着它在完成任务时<b>会阻止</b>其他操作.</p>
+                    <p>此示例将从此进程（渲染器）发送同步消息 "Ping" 到主进程, 然后主进程回答 "Pong".</p>
+
                     <h5>渲染进程 (JavaScript)</h5>
                     <pre><code class="javascript">const { ipcRenderer } = require("electron");
 

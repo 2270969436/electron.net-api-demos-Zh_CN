@@ -187,19 +187,19 @@
   background-color: inherit;
 }
 
-/* ProTip ----------------------------- */
+/* 高级技巧 ----------------------------- */
 
-.demo-protip {
+.demo-高级技巧 {
   margin-top: 2rem;
   padding: 1.5rem 2rem 2rem 2rem;
   border: 1px solid hsla(0,0%,0%,.06);
   border-radius: 6px;
   background: var(--color-accent) linear-gradient(hsla(0,0%,100%,.85), hsla(0,0%,100%,.85));
 }
-.demo-protip h2 {
+.demo-高级技巧 h2 {
   margin: 0 0 .5rem 0;
 }
-.demo-protip strong {
+.demo-高级技巧 strong {
   font-weight: 600;
 }
 

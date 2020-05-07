@@ -1,31 +1,32 @@
 ﻿<template class="task-template">
-  <section id="crash-hang-section" class="section js-section u-category-windows">
-    <header class="section-header">
-      <div class="section-wrapper">
-        <h1>
-          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg>
-          Handling Window Crashes and Hangs
-        </h1>
-        <h3>The <code>Electron.WindowManager</code> will emit events when the renderer process crashes or hangs. You can listen for these events and give users the chance to reload, wait or close that window.</h3>
-        
-        <p>You find the sample source code in <code>Controllers\CrashHangController.cs</code>.</p>
-      </div>
-    </header>
+    <section id="crash-hang-section" class="section js-section u-category-windows">
+        <header class="section-header">
+            <div class="section-wrapper">
+                <h1>
+                    <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-windows"></use></svg>
+                    处理窗口崩溃和挂起
+                </h1>
+                <h3><code>Electron.WindowManager</code> 模块将在渲染器进程崩溃或挂起时发出事件. 您可以监听这些事件, 并给用户重新加载, 等待或关闭该窗口的机会.</h3>
 
-    <div class="demo">
-      <div class="demo-wrapper">
-        <button id="new-window-crashes-demo-toggle" class="js-container-target demo-toggle-button">Relaunch window after the process crashes
-          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Main</div>
-        </button>
-        <div class="demo-box">
-          <div class="demo-controls">
-            <button class="demo-button" id="process-crash">查看示例</button>
-          </div>
-          <p>In this demo we create a new window and provide a link that will force a crash using <code>process.crash()</code>.</p>
-          <p>The window is listening for the crash event and when the event occurs it prompts the user with two options: reload or close.</p>
+                <p>您可以在<code>Controllers\CrashHangController.cs</code>中找到示例源代码.</p>
+            </div>
+        </header>
 
-          <h5>主进程 (C#)</h5>
-          <pre><code class="csharp">var browserWindow = await Electron.WindowManager.CreateWindowAsync(viewPath);
+        <div class="demo">
+            <div class="demo-wrapper">
+                <button id="new-window-crashes-demo-toggle" class="js-container-target demo-toggle-button">
+                    进程崩溃后重载窗体
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Main</div>
+                </button>
+                <div class="demo-box">
+                    <div class="demo-controls">
+                        <button class="demo-button" id="process-crash">查看示例</button>
+                    </div>
+                    <p>在这个示例中我们创建一个新窗口，并提供了一个使用 <code>process.crash()</code> 方法强制崩溃的链接.</p>
+                    <p>当前窗体正在监听崩溃事件, 当此事件发生时, 它提供用户两个选项: 重新加载或关闭.</p>
+
+                    <h5>主进程 (C#)</h5>
+                    <pre><code class="csharp">var browserWindow = await Electron.WindowManager.CreateWindowAsync(viewPath);
 browserWindow.WebContents.OnCrashed += async (killed) => {
     var options = new MessageBoxOptions("This process has crashed.") {
         Type = MessageBoxType.info,
@@ -42,24 +43,25 @@ browserWindow.WebContents.OnCrashed += async (killed) => {
         browserWindow.Close();
     }
 };</code></pre>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="demo">
-      <div class="demo-wrapper">
-        <button id="new-window-hangs-demo-toggle" class="js-container-target demo-toggle-button">Relaunch window after the process hangs
-          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Main</div>
-        </button>
-        <div class="demo-box">
-          <div class="demo-controls">
-            <button class="demo-button" id="process-hang">查看示例</button>
-          </div>
-          <p>In this demo we create a new window and provide a link that will force the process to hang using <code>process.hang()</code>.</p>
-          <p>The window is listening for the process to become officially unresponsive (this can take up to 30 seconds). When this event occurs it prompts the user with two options: reload or close.</p>
+        <div class="demo">
+            <div class="demo-wrapper">
+                <button id="new-window-hangs-demo-toggle" class="js-container-target demo-toggle-button">
+                    进程挂起后重新启动窗口
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Main</div>
+                </button>
+                <div class="demo-box">
+                    <div class="demo-controls">
+                        <button class="demo-button" id="process-hang">查看示例</button>
+                    </div>
+                    <p>在这个示例中我们创建一个新窗口，并提供了一个使用 <code>process.hang()</code> 方法强制挂起进程的链接.</p>
+                    <p>当前窗体正在监听进程是否真正无响应 (这可能需要长达30秒). 当此事件发生时, 它提供用户两个选项: 重新加载或关闭.</p>
 
-          <h5>主进程 (C#)</h5>
-          <pre><code class="csharp">var browserWindow = await Electron.WindowManager.CreateWindowAsync();
+                    <h5>主进程 (C#)</h5>
+                    <pre><code class="csharp">var browserWindow = await Electron.WindowManager.CreateWindowAsync();
 browserWindow.OnUnresponsive += async () => {
     var options = new MessageBoxOptions("This process is hanging.")
     {
@@ -79,35 +81,37 @@ browserWindow.OnUnresponsive += async () => {
     }
 };</code></pre>
 
-          <div class="demo-protip">
-            <h2>ProTip</h2>
-            <strong>Wait for the process to become responsive again.</strong>
-            <p>A third option in the case of a process that is hanging is to wait and see if the problem resolves, allowing the process to become responsive again. To do this, use the <code>BrowserWindow</code> event 'OnResponsive' as shown below.</p>
-            <pre><code class="csharp">browserWindow.OnResponsive += () =>
-{
-    // Do something when the window is responsive again
-};</code></pre>
-          </div>
+                    <div class="demo-高级技巧">
+                        <h2>高级技巧</h2>
+                        <strong>等待进程再次响应.</strong>
+                        <p>在进程挂起的的情况下, 第三个选择是等待并查看问题是否解决, 允许进程再次响应. 为此, 请使用 <code>BrowserWindow</code> 的 "responsive" 事件, 如下所示:</p>
+                        <pre><code class="csharp">
+    browserWindow.OnResponsive += () =>
+    {
+    // 当窗口再次响应时做些什么
+    };
+</code></pre>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
 
 
-    <script type="text/javascript">
-    (function(){
-      const { ipcRenderer } = require("electron");
-      
-      document.getElementById("process-crash").addEventListener("click", () => {
-        ipcRenderer.send("process-crash");
-        });
+        <script type="text/javascript">
+            (function () {
+                const { ipcRenderer } = require("electron");
 
-      document.getElementById("process-hang").addEventListener("click", () => {
-        ipcRenderer.send("process-hang");
-        });     
+                document.getElementById("process-crash").addEventListener("click", () => {
+                    ipcRenderer.send("process-crash");
+                });
 
-      }());
-    </script>
+                document.getElementById("process-hang").addEventListener("click", () => {
+                    ipcRenderer.send("process-hang");
+                });
 
-  </section>
+            }());
+        </script>
+
+    </section>
 </template>

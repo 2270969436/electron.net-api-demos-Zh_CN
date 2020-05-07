@@ -30,7 +30,7 @@
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">await Electron.WindowManager.CreateWindowAsync();</code></pre>
 
-                    <div class="demo-protip">
+                    <div class="demo-高级技巧">
                         <h2>高级技巧</h2>
                         <strong>使用不可见的浏览器窗口来运行后台任务.</strong>
                         <p>您可以将新的浏览器窗口设置为不显示（不可见），以便将该附加呈现程序进程用作一种新线程，在应用程序的后台运行C#。通过在定义新窗口时将<code>show</code>属性设置为<code>false</code>来执行此操作</p>
@@ -62,7 +62,7 @@ public async void ElectronBootstrap()
                         <button class="demo-button" id="manage-window">查看示例</button>
                         <span class="demo-response" id="manage-window-reply"></span>
                     </div>
-                    <p>在这个示例中, 我们创建一个新窗口, 并监听 <code>move</code> 和 <code>resize</code> 事件. 点击示例按钮, 并更改新窗口大小和位置, 然后在上方查看输出的大小和位置信息.</p>
+                    <p>在这个示例中, 我们创建一个新窗口, 并监听 <code>move</code> 和 <code>resize</code> 事件. 点击“查看示例”按钮, 并更改新窗口大小和位置, 然后在上方查看输出的大小和位置信息.</p>
                     <p>有很多方法用于控制窗口的状态, 如大小, 位置和焦点状态以及监听窗口更改的事件. 完整的列表请查看 <a href="http://electron.atom.io/docs/api/browser-window">文档<span class="u-visible-to-screen-reader">(在新窗口中打开)</span></a>.</p>
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">public IActionResult Index()
@@ -102,7 +102,7 @@ private async void UpdateReply()
                         <button class="demo-button" id="listen-to-window">查看示例</button>
                         <button class="demo-button disappear" id="focus-on-modal-window">示例获取焦点</button>
                     </div>
-                    <p>在这个示例中, 我们创建一个新窗体并监听它的 <code>OnBlur</code> 事件. 点击示例按钮创建一个新的模态窗体, 然后点击父级窗体来切换焦点. 你可以通过点击 <i>示例获取焦点</i> 按钮来让示例窗体再次获得焦点.</p>
+                    <p>在这个示例中, 我们创建一个新窗体并监听它的 <code>OnBlur</code> 事件. 点击“查看示例”按钮创建一个新的模态窗体, 然后点击父级窗体来切换焦点. 你可以通过点击 <i>示例获取焦点</i> 按钮来让示例窗体再次获得焦点.</p>
 
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">var mainBrowserWindow = Electron.WindowManager.BrowserWindows.First();

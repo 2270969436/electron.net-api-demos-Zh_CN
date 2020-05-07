@@ -6,34 +6,35 @@
                     <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-system"></use></svg>
                     剪贴板
                 </h1>
-                <h3>The <code>Electron.Clipboard</code> provides methods to perform copy and paste operations.</h3>
-                <p>This module also has methods for copying text as markup (HTML) to the clipboard.</p>
-                
-                <p>You find the sample source code in <code>Controllers\ClipboardController.cs</code>.</p>
+                <h3><code>Electron.Clipboard</code>剪贴板提供了执行复制和粘贴操作的方法</h3>
+                <p>此模块还具有将文本作为标记（HTML）复制到剪贴板的方法.</p>
+
+                <p>您可以在<code>Controllers\ClipboardController.cs</code>中找到示例源代码.</p>
             </div>
         </header>
 
         <div class="demo">
             <div class="demo-wrapper">
                 <button id="copy-to-demo-toggle" class="js-container-target demo-toggle-button">
-                    Copy
-                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+                    复制
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Both</div>
                 </button>
                 <div class="demo-box">
                     <div class="demo-controls">
                         <button class="demo-button" id="copy-to">Copy</button>
                         <input class="demo-input" id="copy-to-input" aria-label="Click copy" placeholder="Click copy."></input>
                     </div>
-                    <p>In this example we copy a phrase to the clipboard. After clicking 'Copy' use the text area to paste (CMD + V or CTRL + V) the phrase from the clipboard.</p>
+                    <p>在这个示例中, 我们将一个短语复制到剪贴板. 单击 "复制" 按钮后, 使用粘贴（CMD + V 或 CTRL + V）将短语粘贴到文本区域.</p>
+
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">Electron.IpcMain.On("copy-to", (text) => 
 {
     Electron.Clipboard.WriteText(text.ToString());
 });</code></pre>
-                    <div class="demo-protip">
-                        <h2>ProTip</h2>
-                        <strong>Electron.js Support in Electron.NET.</strong>
-                        <p>The <code>clipboard</code> module is built into Electron.js (therefore you can use this in the renderer processes).</p>
+                    <div class="demo-高级技巧">
+                        <h2>高级技巧</h2>
+                        <strong>Electron.NET中的Electron.js支持.</strong>
+                        <p><code>剪贴板</code>模块内置在Electron.js中（因此您可以在渲染器进程中使用它）。</p>
                         <pre><code class="language-js">const clipboard = require('electron').clipboard;
 
 const copyBtn = document.getElementById('copy-to');
@@ -52,15 +53,15 @@ copyBtn.addEventListener('click', () => {
         <div class="demo">
             <div class="demo-wrapper">
                 <button id="paste-to-demo-toggle" class="js-container-target demo-toggle-button">
-                    Paste
-                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> Process: Both</div>
+                    粘贴
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Both</div>
                 </button>
                 <div class="demo-box">
                     <div class="demo-controls">
                         <button class="demo-button" id="paste-to">Paste</button>
                         <span class="demo-response" id="paste-from"></span>
                     </div>
-                    <p>In this example we copy a string to the clipboard and then paste the results into a message above.</p>
+                    <p>在本例中，我们将字符串复制到剪贴板，然后将结果粘贴到上面的消息中.</p>
 
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">Electron.IpcMain.On("paste-to", async (text) =>
@@ -72,10 +73,10 @@ copyBtn.addEventListener('click', () => {
     Electron.IpcMain.Send(mainWindow, "paste-from", pasteText);
 });</code></pre>
 
-                    <div class="demo-protip">
-                        <h2>ProTip</h2>
-                        <strong>Electron.js Support in Electron.NET.</strong>
-                        <p>The <code>clipboard</code> module is built into Electron.js (therefore you can use this in the renderer processes).</p>
+                    <div class="demo-高级技巧">
+                        <h2>高级技巧</h2>
+                        <strong>Electron.NET中的Electron.js支持.</strong>
+                        <p><code>clipboard</code>模块内置在Electron.js中（因此您可以在渲染器进程中使用它）。</p>
                         <pre><code class="language-js">const clipboard = require('electron').clipboard;
 
 const pasteBtn = document.getElementById('paste-to');
@@ -90,15 +91,15 @@ pasteBtn.addEventListener('click', () => {
             </div>
         </div>
 
-         <script>
-            (function(){
+        <script>
+            (function () {
                 const { ipcRenderer } = require("electron");
-                
+
                 document.getElementById("copy-to").addEventListener("click", () => {
                     document.getElementById('copy-to-input').placeholder = 'Copied! Paste here to see.';
                     ipcRenderer.send("copy-to", "Electron.NET Demo!");
                 });
-                
+
                 document.getElementById("paste-to").addEventListener("click", () => {
                     ipcRenderer.send("paste-to", "What a demo!");
                 });

@@ -1,31 +1,32 @@
 ﻿<template class="task-template">
-  <section id="desktop-capturer-section" class="section js-section u-category-media">
-    <header class="section-header">
-      <div class="section-wrapper">
-        <h1>
-          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-media"></use></svg>
-          Take a screenshot
-        </h1>
-        <h3>The <code>desktopCapturer</code> module in Electron can be used to access any media, such as audio, video, screen and window, that is available through the <code>getUserMedia</code> web API in Chromium.</h3>
+    <section id="desktop-capturer-section" class="section js-section u-category-media">
+        <header class="section-header">
+            <div class="section-wrapper">
+                <h1>
+                    <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-media"></use></svg>
+                    创建屏幕截图
+                </h1>
+                <h3>Electron 中的 <code>desktopCapturer</code> 模块可用于访问 Chromium 的 <code>getUserMedia</code> web API 中提供的任何媒体, 例如音频, 视频, 屏幕和窗口.</h3>
 
-        <p>Open the <a href="http://electron.atom.io/docs/api/desktop-capturer">full API documentation<span class="u-visible-to-screen-reader">(opens in new window)</span></a> in your browser.</p>
-      </div>
-    </header>
+                <p>在浏览器中查看 <a href="http://electron.atom.io/docs/api/desktop-capturer">完整 API 文档<span class="u-visible-to-screen-reader">(在新窗口中打开)</span></a>.</p>
+            </div>
+        </header>
 
-    <div class="demo">
-      <div class="demo-wrapper">
-        <button id="print-pdf-demo-toggle" class="js-container-target demo-toggle-button">Take a Screenshot
-          <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux | Process: Renderer</div>
-        </button>
-        <div class="demo-box">
-          <div class="demo-controls">
-            <button class="demo-button" id="screen-shot">查看示例</button>
-            <span class="demo-response is-selectable" id="screenshot-path"></span>
-          </div>
-          <p>This demo uses the <code>desktopCapturer</code> module to gather screens in use and select the entire screen and take a snapshot of what is visible.</p>
-          <p>Clicking the demo button will take a screenshot of your current screen and open it in your default viewer.</p>
-          <h5>渲染进程 (JavaScript)</h5>
-          <pre><code class="javascript">const electron = require('electron');
+        <div class="demo">
+            <div class="demo-wrapper">
+                <button id="print-pdf-demo-toggle" class="js-container-target demo-toggle-button">
+                    创建屏幕截图
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux | Process: Renderer</div>
+                </button>
+                <div class="demo-box">
+                    <div class="demo-controls">
+                        <button class="demo-button" id="screen-shot">查看示例</button>
+                        <span class="demo-response is-selectable" id="screenshot-path"></span>
+                    </div>
+                    <p>此示例使用 <code>desktopCapturer</code> 模块采集正在使用的屏幕, 并创建全屏幕截图.</p>
+                    <p>点击示例按钮将截取当前屏幕的截图, 并在默认查看器中打开它.</p>
+                    <h5>渲染进程 (JavaScript)</h5>
+                    <pre><code class="javascript">const electron = require('electron');
 const desktopCapturer = electron.desktopCapturer;
 const electronScreen = electron.screen;
 const shell = electron.shell;
@@ -68,59 +69,59 @@ function determineScreenShotSize () {
         height: maxDimension * window.devicePixelRatio
     }
 }</code></pre>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <script type="text/javascript">
-      (function(){
-          
-            const electron = require('electron');
-            const desktopCapturer = electron.desktopCapturer;
-            const electronScreen = electron.screen;
-            const shell = electron.shell;
+        <script type="text/javascript">
+            (function () {
 
-            const fs = require('fs');
-            const os = require('os');
-            const path = require('path');
+                const electron = require('electron');
+                const desktopCapturer = electron.desktopCapturer;
+                const electronScreen = electron.screen;
+                const shell = electron.shell;
 
-            const screenshot = document.getElementById('screen-shot');
-            const screenshotMsg = document.getElementById('screenshot-path');
+                const fs = require('fs');
+                const os = require('os');
+                const path = require('path');
 
-            screenshot.addEventListener('click', function (event) {
-                screenshotMsg.textContent = 'Gathering screens...';
-                const thumbSize = determineScreenShotSize();
-                let options = { types: ['screen'], thumbnailSize: thumbSize }
+                const screenshot = document.getElementById('screen-shot');
+                const screenshotMsg = document.getElementById('screenshot-path');
 
-                desktopCapturer.getSources(options, function (error, sources) {
-                    if (error) return console.log(error);
+                screenshot.addEventListener('click', function (event) {
+                    screenshotMsg.textContent = 'Gathering screens...';
+                    const thumbSize = determineScreenShotSize();
+                    let options = { types: ['screen'], thumbnailSize: thumbSize }
 
-                    sources.forEach(function (source) {
-                        if (source.name === 'Entire screen' || source.name === 'Screen 1') {
-                            const screenshotPath = path.join(os.tmpdir(), 'screenshot.png');
+                    desktopCapturer.getSources(options, function (error, sources) {
+                        if (error) return console.log(error);
 
-                            fs.writeFile(screenshotPath, source.thumbnail.toPng(), function (error) {
-                            if (error) return console.log(error);
-                            shell.openExternal('file://' + screenshotPath);
-                            const message = `Saved screenshot to: ${screenshotPath}`;
-                            screenshotMsg.textContent = message;
-                            });
-                        }
+                        sources.forEach(function (source) {
+                            if (source.name === 'Entire screen' || source.name === 'Screen 1') {
+                                const screenshotPath = path.join(os.tmpdir(), 'screenshot.png');
+
+                                fs.writeFile(screenshotPath, source.thumbnail.toPng(), function (error) {
+                                    if (error) return console.log(error);
+                                    shell.openExternal('file://' + screenshotPath);
+                                    const message = `Saved screenshot to: ${screenshotPath}`;
+                                    screenshotMsg.textContent = message;
+                                });
+                            }
+                        })
                     })
                 })
-            })
 
-            function determineScreenShotSize () {
-                const screenSize = electronScreen.getPrimaryDisplay().workAreaSize;
-                const maxDimension = Math.max(screenSize.width, screenSize.height);
-                return {
-                    width: maxDimension * window.devicePixelRatio,
-                    height: maxDimension * window.devicePixelRatio
+                function determineScreenShotSize() {
+                    const screenSize = electronScreen.getPrimaryDisplay().workAreaSize;
+                    const maxDimension = Math.max(screenSize.width, screenSize.height);
+                    return {
+                        width: maxDimension * window.devicePixelRatio,
+                        height: maxDimension * window.devicePixelRatio
+                    }
                 }
-            }
 
             }());
-    </script>
+        </script>
 
-  </section>
+    </section>
 </template>

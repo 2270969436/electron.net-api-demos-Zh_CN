@@ -26,7 +26,7 @@
                     </div>
                     <p>示例按钮使用 <code>ipcRenderer</code> 模块向主进程发送消息. 在主进程中, 应用程序会被告知在托盘中放置一个带有上下文菜单的图标.</p>
                     
-                    <p>在此示例中, 可以通过单击托盘图标上下文菜单中的 "移除" 或再次点击示例按钮来删除托盘图标.</p>
+                    <p>在此示例中, 可以通过单击托盘图标上下文菜单中的 "移除" 或再次点击“查看示例”按钮来删除托盘图标.</p>
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">Electron.IpcMain.On("put-in-tray", (args) => {
 
@@ -65,7 +65,7 @@ document.getElementById("put-in-tray").addEventListener("click", () => {
 
     document.getElementById('tray-countdown').innerHTML = message;</code></pre>
 
-                    <div class="demo-protip">
+                    <div class="demo-高级技巧">
                         <h2>高级技巧</h2>
                         <strong>Linux中的托盘支持.</strong>
                         <p>在只有应用程序指示器支持的 Linux 发行版上，用户需要安装 <code>libappindicator1</code> 来使托盘图标正常工作. 有关在 Linux 上使用托盘的更多详细信息请查看 <a href="http://electron.atom.io/docs/api/tray">完整 API 文档<span class="u-visible-to-screen-reader">(在新窗口中打开)</span></a>.</p>

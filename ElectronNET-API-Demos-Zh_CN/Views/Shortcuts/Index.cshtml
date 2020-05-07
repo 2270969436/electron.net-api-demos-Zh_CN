@@ -1,24 +1,22 @@
 ﻿<template class="task-template">
   <section id="shortcuts-section" class="section js-section u-category-menu">
     <header class="section-header">
-      <div class="section-wrapper">
-        <h1>
-          <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
-          Keyboard Shortcuts
-        </h1>
+        <div class="section-wrapper">
+            <h1>
+                <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-menu"></use></svg>
+                键盘快捷键
+            </h1>
 
-        <h3>The <code>Electron.GlobalShortcut</code> and <code>MenuItem</code> can be used to define keyboard shortcuts.</h3>
+            <h3>可以使用 <code>Electron.GlobalShortcut</code> 和 <code>MenuItem</code> 模块定义键盘快捷键.</h3>
 
-        <p>
-          In Electron.NET, keyboard shortcuts are called accelerators.
-          They can be assigned to actions in your application's Menu,
-          or they can be assigned globally so they'll be triggered even when
-          your app doesn't have keyboard focus.
-        </p>
-        
-        <p>You find the sample source code in <code>Controllers\ShortcutsController.cs</code>.</p>
+            <p>
+                在 Electron.NET 中, 键盘快捷键被称作加速器(Accelerator). 它们可以分配到应用程序菜单中的操作上,
+                也可以全局分配，所以即使你的应用程序没有获得键盘焦点, 它们也可以被触发.
+            </p>
 
-      </div>
+            <p>您可以在<code>Controllers\ShortcutsController.cs</code>中找到示例源代码.</p>
+
+        </div>
     </header>
 
     <div class="demo">
@@ -27,14 +25,13 @@
           <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Main</div>
         </button>
         <div class="demo-box">
-          <p>
-            To try this demo, press <kbd class="normalize-to-platform">CommandOrControl+Alt+K</kbd> on your keyboard.
-          </p>
+            <p>
+                试一下这个示例, 在键盘上按下 <kbd class="normalize-to-platform">CommandOrControl+Alt+K</kbd> 快捷键.
+            </p>
 
-          <p>
-            Global shortcuts are detected even when the app doesn't have
-            keyboard focus.
-          </p>
+            <p>
+                即使应用程序没有键盘焦点, 也会检测到全局快捷键.
+            </p>
 
           <h5>主进程 (C#)</h5>
           <pre><code class="csharp">Electron.GlobalShortcut.Register("CommandOrControl+Alt+K", async () => {
@@ -49,14 +46,12 @@
 
 Electron.App.WillQuit += (args) => Task.Run(() => Electron.GlobalShortcut.UnregisterAll());</code></pre>
 
-          <div class="demo-protip">
-            <h2>ProTip</h2>
-            <strong>Avoid overriding system-wide keyboard shortcuts.</strong>
+          <div class="demo-高级技巧">
+            <h2>高级技巧</h2>
+            <strong>避免覆盖系统范围的键盘快捷键.</strong>
             <p>
-              When registering global shortcuts, it's important to be aware of
-              existing defaults in the target operating system, so as not to
-              override any existing behaviors. For an overview of each
-              operating system's keyboard shortcuts, view these documents:
+                注册全局快捷方式时, 请务必注意目标操作系统中的现有默认值, 以免覆盖任何现有行为.
+                有关每个操作系统键盘快捷键的概述, 请查看这些文档:
             </p>
 
             <ul>

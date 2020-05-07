@@ -4,30 +4,29 @@
             <div class="section-wrapper">
                 <h1>
                     <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-communication"></use></svg>
-                    Execute your own TypeScript code
+                    执行自己的TypeScript代码
                 </h1>
-                <h3>The <code>HostHook</code> API allows you to execute your own JavaScript/TypeScript code on the host process.</h3>
-
-                <p>Create first an ElectronHostHook directory via the Electron.NET CLI, with the following command: <code>electronize add hosthook</code>.</p>
-                <p>In this directory you can install any NPM packages and embed your own JavaScript/TypeScript code. It is also possible to respond to events from the host process.</p>
-                <p>You find the sample source code in <code>Controllers\HostHookController.cs</code> and in the <code>ElectronHostHook</code> folder.</p>
+                <h3><code>HostHook</code>的API允许您在主机进程上执行自己的JavaScript/TypeScript代码.</h3>
+                <p>首先使用以下命令通过Electron.NET CLI创建Electron hosthook目录：<code>electronize add hosthook</code>.</p>
+                <p>在这个目录中，您可以安装任何NPM包并嵌入您自己的JavaScript/TypeScript代码。也可以响应主机进程中的事件.</p>
+                <p>您可以在<code>Controllers\HostHookController.cs</code>和<code>ElectronHostHook</code>文件夹中找到示例源代码.</p>
             </div>
         </header>
 
         <div class="demo">
             <div class="demo-wrapper">
                 <button id="async-msg-demo-toggle" class="js-container-target demo-toggle-button">
-                    Execute TypeScript code
+                    执行 TypeScript 代码
                     <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux <span class="demo-meta-divider">|</span> 进程: Main</div>
                 </button>
                 <div class="demo-box">
                     <div class="demo-controls">
-                        <button class="demo-button" id="start-hoosthook-button">Create Excel-File</button>
+                        <button class="demo-button" id="start-hoosthook-button">创建Excel文件</button>
                         <span class="demo-response" id="hoosthook-reply"></span>
                     </div>
-                    <p>Use <code>Electron.HostHook.CallAsync</code> to execute asynchronously your own JavaScript/TypeScript code, that expect a result value.</p>
+                    <p>使用<code>Electron.HostHook.CallAsync</code>异步执行您自己的JavaScript/TypeScript代码，该代码需要一个结果值.</p>
 
-                    <p>This example execute the TypeScript code, that listening on "create-excel". The TypeScript code use a NPM Package names exceljs, to create a Excel file and reply a success message.</p>
+                    <p>这个例子执行TypeScript代码，监听“create-excel”。TypeScript代码使用一个名为exceljs的NPM包来创建一个Excel文件并回复一条成功消息.</p>
 
                     <h5>主进程 (C#)</h5>
                     <pre><code class="csharp">Electron.IpcMain.On("start-hoosthook", async (args) =>
@@ -48,32 +47,34 @@
                     </pre>
                     <h5>index.ts from ElectronHostHook-Folder (TypeScript)</h5>
                     <pre>
-                        <code class="typescript">import * as Electron from "electron";
-import { Connector } from "./connector";
-import { ExcelCreator } from "./excelCreator";
+                    <code class="typescript">
+                            import * as Electron from "electron";
+                            import { Connector } from "./connector";
+                            import { ExcelCreator } from "./excelCreator";
 
-export class HookService extends Connector {
-    constructor(socket: SocketIO.Socket, public app: Electron.App) {
-        super(socket, app);
-    }
+                            export class HookService extends Connector {
+                            constructor(socket: SocketIO.Socket, public app: Electron.App) {
+                            super(socket, app);
+                            }
 
-    onHostReady(): void {
-        // execute your own JavaScript Host logic here
-        this.on("create-excel", async (path, done) => {
-            const excelCreator: ExcelCreator = new ExcelCreator();
-            const result: string = await excelCreator.create(path);
+                            onHostReady(): void {
+                            // 在这里执行您自己的JavaScript业务逻辑
+                            this.on("create-excel", async (path, done) => {
+                            const excelCreator: ExcelCreator = new ExcelCreator();
+                            const result: string = await excelCreator.create(path);
 
-            done(result);
-        });
-    }
-}</code>
+                            done(result);
+                            });
+                            }
+                            }
+                        </code>
                     </pre>
                 </div>
             </div>
         </div>
 
         <script>
-            (function(){
+            (function () {
                 const { ipcRenderer } = require("electron");
 
                 document.getElementById("start-hoosthook-button").addEventListener("click", () => {

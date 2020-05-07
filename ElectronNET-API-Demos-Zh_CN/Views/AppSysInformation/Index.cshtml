@@ -69,7 +69,7 @@ ipcRenderer.on("got-app-path", (event, path) => {
     document.getElementById('got-version-info').innerHTML = message;
 });</code></pre>
 
-                    <div class="demo-protip">
+                    <div class="demo-高级技巧">
                         <h2>高级技巧</h2>
                         <strong>查找Chromium、Node.js和V8的版本.</strong>
                         <p>Electron还包括<code>process.versions</code>对象中Chromium、Node.js和V8的版本。您可以通过在Electron应用程序中打开开发人员工具并键入<code>process.versions</code>来快速实现。</p>
@@ -133,7 +133,7 @@ ipcRenderer.on("got-app-path", (event, path) => {
     Electron.IpcMain.Send(mainWindow, "got-screen-info", display.Size);
 });</code></pre>
 
-                    <div class="demo-protip">
+                    <div class="demo-高级技巧">
                         <h2>高级技巧</h2>
                         <strong>尺寸差异.</strong>
                         <p>示例中的 <code>.Size</code>方法返回屏幕的原始尺寸, 但由于系统菜单栏, 这可能不是您的应用程序的实际可用空间.</p>

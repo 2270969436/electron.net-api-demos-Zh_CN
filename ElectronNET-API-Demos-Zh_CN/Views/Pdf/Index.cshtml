@@ -23,7 +23,7 @@
                         <button class="demo-button" id="print-pdf">查看示例</button>
                         <span class="demo-response is-selectable" id="pdf-path"></span>
                     </div>
-                    <p>为了演示打印到PDF功能, 上面的示例按钮会将此页面保存为PDF, 如果您有PDF查看器, 请打开文件.</p>
+                    <p>为了演示打印到PDF功能, 上面的“查看示例”按钮会将此页面保存为PDF, 如果您有PDF查看器, 请打开文件.</p>
                     <p>在实际的应用程序中, 你更可能将它添加到应用程序菜单中, 但为了演示的目的, 我们将其设置为示例按钮.</p>
                     <h5>渲染进程 (JavaScript)</h5>
                     <pre><code class="javascript">const { ipcRenderer } = require("electron");
@@ -56,7 +56,7 @@ document.getElementById("print-pdf").addEventListener("click", () => {
     }
 });</code></pre>
 
-                    <div class="demo-protip">
+                    <div class="demo-高级技巧">
                         <h2>高级技巧</h2>
                         <strong>使用打印样式表.</strong>
                         <p>您可以创建打印目标的样式表, 以优化用户打印的外观. 下面是在这个应用程序中使用的样式表, 位于 <code>assets/css/print.css</code> 中.</p>
