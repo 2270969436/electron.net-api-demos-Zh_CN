@@ -28,6 +28,123 @@ $ cd electron.net-api-demos-Zh_CN
 $ electronize start
 ```
 
+## 👩‍🏫 在新项目中使用Electron.NET
+
+请在您的ASP.NET Core应用程序中安装[ElectronNET.API NuGet package]
+````
+PM> Install-Package ElectronNET.API
+````
+### Program.cs
+
+使用“UseElectron”WebHostBuilder扩展名启动Electron.NET。
+
+```csharp
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseElectron(args);
+                    webBuilder.UseStartup<Startup>();
+                });
+```
+
+### Startup.cs
+
+在Startup.cs文件中配置Electron的启动窗口: 
+
+```csharp
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    ...
+
+    // 在这里打开Electron窗口
+    Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
+}
+```
+
+## 🚀 启动应用程序
+
+要启动应用程序，请确保已将“[ElectronNET.CLI](https://www.nuget.org/packages/ElectronNET.CLI/)”包作为全局工具安装：
+
+```
+dotnet tool install ElectronNET.CLI -g
+```
+
+第一次使用，您需要将Electron.NET项目初始化。在ASP.NET Core文件夹中键入以下命令:
+
+```
+electronize init
+```
+
+* 现在，一个electronnet.manifest.json应该出现在您的ASP.NET Core项目中
+* 现在运行以下命令:
+
+```
+electronize start
+```
+
+### 注意
+> 第一次启动Electron会比较慢，后续启动会比第一次快很多。
+
+## 🔭 使用文件监视程序开发Electron.NET应用
+
+文件监视程序包含在Electron.NET版本 8.31.1 中。例如，文件更改可以触发编译、测试执行或部署。Electron.NET窗口将自动刷新，新的代码更改将更快地显示。需要以下Electron.NET CLI 命令:
+
+```
+electronize start /watch
+```
+
+## 🐞 调试
+
+使用 Electron.NET CLI 命令启动Electron.NET应用程序。在 Visual Studio 中附加到正在运行的应用程序实例。转到调试菜单，然后单击"附加到进程..."。按右侧的项目名称排序，并在列表中选择它.
+
+
+## 📔Electron API 的使用
+
+请查看示例应用程序的源代码：[Electron.NET API Demos (中文版)](https://github.com/2270969436/electron.net-api-demos-Zh_CN)  
+
+  
+## ⛏ 程序打包
+
+这里您还需要Electron.NET CLI。在ASP.NET Core文件夹中键入以下命令:
+
+```
+electronize build /target win
+```
+
+还有其他可用的平台:
+
+```
+electronize build /target win
+electronize build /target osx
+electronize build /target linux
+```
+
+这三个"默认"目标将为这些平台生成 x64 包。.
+
+对于某些 NuGet 包或某些方案，您可能需要构建纯 x86 应用程序。为了支持这些内容，您可以定义所需的[.NET Core runtime](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)，[electron platform](https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#platform)和[electron architecture](https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#arch)，如下所示：
+
+```
+electronize build /target custom win7-x86;win32 /electron-arch ia32 
+```
+
+最终结果应该是/bin/桌面文件夹下的电子应用程序。
+
+### 注意
+> macOS 生成无法在 Windows 计算机上创建，因为它们需要 Windows 上不支持的符号链接（基于此[Electron issue](https://github.com/electron-userland/electron-packager/issues/71)）。macOS 构建可以在 Linux 或 macOS 计算机上生成。
+
+### 节点集成
+Electron.NET需要启用节点集成才能启用 IPC 才能运行。如果您不使用 IPC 功能，您可以禁用节点集成，如下所示:
+
+```csharp
+WebPreferences wp = new WebPreferences();
+wp.NodeIntegration = false;
+BrowserWindowOptions browserWindowOptions = new BrowserWindowOptions
+{
+    WebPreferences = wp
+}
+
+```
 
 ## Electron相关
 >ELectron.NET 源码
