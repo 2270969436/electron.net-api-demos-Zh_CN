@@ -1,0 +1,60 @@
+﻿<template class="task-template">
+    <section id="update-section" class="section js-section u-category-update">
+        <header class="section-header">
+            <div class="section-wrapper">
+                <h1>
+                    <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-update"></use></svg>
+                    更新
+                </h1>
+                <h3><code>Electron.AutoUpdater</code> 允许您自动更新应用程序.</h3>
+                <p>要发布更新，您只需要简单的文件配置，它不需要专用服务器.</p>
+                <p>您可以在<code>Controllers\UpdateController.cs</code>中找到示例源代码.</p>
+            </div>
+        </header>
+
+        <div class="demo">
+            <div class="demo-wrapper">
+                <button id="tray-demo-toggle" class="js-container-target demo-toggle-button">
+                    自动更新此应用程序
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux | 进程: Main</div>
+                </button>
+                <div class="demo-box">
+                    <div class="demo-controls">
+                        <button class="demo-button" id="btn-update">查看示例</button>
+                        <span class="demo-response" id="demo-reply"></span>
+                    </div>
+                    <p>示例按钮调用主进程中的<code>Electron.AutoUpdater.CheckForUpdatesAndNotifyAsync()</code></p>
+
+                    <p>这将立即下载更新，然后在应用程序退出时在后台安装.</p>
+                    <h5>主进程 (C#)</h5>
+                    <pre><code class="csharp">Electron.IpcMain.On("auto-update", async (args) =>
+{
+    var currentVersion = await Electron.App.GetVersionAsync();
+    var updateCheckResult = await Electron.AutoUpdater.CheckForUpdatesAndNotifyAsync();
+    var availableVersion = updateCheckResult.UpdateInfo.Version;
+    string information = $"Current version: {currentVersion} - available version: {availableVersion}";
+
+    var mainWindow = Electron.WindowManager.BrowserWindows.First();
+    Electron.IpcMain.Send(mainWindow, "auto-update-reply", information);
+});
+</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function(){
+                const { ipcRenderer } = require("electron");
+
+                document.getElementById("btn-update").addEventListener("click", () => {
+                    ipcRenderer.send("auto-update");
+                });
+
+                ipcRenderer.on('auto-update-reply', (event, message) => {
+                    document.getElementById('demo-reply').innerHTML = message;
+                });
+            }());
+        </script>
+
+    </section>
+</template>

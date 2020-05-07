@@ -1,0 +1,79 @@
+﻿<template class="task-template">
+    <section id="pdf-section" class="section js-section u-category-media">
+        <header class="section-header">
+            <div class="section-wrapper">
+                <h1>
+                    <svg class="section-icon"><use xlink:href="assets/img/icons.svg#icon-media"></use></svg>
+                    打印到 PDF
+                </h1>
+                <h3>Electron 中的 <code>BrowserWindow</code> 模块具有 <code>WebContents</code> 属性, 它允许您的应用程序进行打印以及打印到PDF.</h3>
+
+                <p>您可以在<code>Controllers\PdfController.cs</code>中找到示例源代码.</p>
+            </div>
+        </header>
+
+        <div class="demo">
+            <div class="demo-wrapper">
+                <button id="print-pdf-demo-toggle" class="js-container-target demo-toggle-button">
+                    打印到 PDF
+                    <div class="demo-meta u-avoid-clicks">支持: Win, macOS, Linux</div>
+                </button>
+                <div class="demo-box">
+                    <div class="demo-controls">
+                        <button class="demo-button" id="print-pdf">查看示例</button>
+                        <span class="demo-response is-selectable" id="pdf-path"></span>
+                    </div>
+                    <p>为了演示打印到PDF功能, 上面的示例按钮会将此页面保存为PDF, 如果您有PDF查看器, 请打开文件.</p>
+                    <p>在实际的应用程序中, 你更可能将它添加到应用程序菜单中, 但为了演示的目的, 我们将其设置为示例按钮.</p>
+                    <h5>渲染进程 (JavaScript)</h5>
+                    <pre><code class="javascript">const { ipcRenderer } = require("electron");
+
+document.getElementById("print-pdf").addEventListener("click", () => {
+    ipcRenderer.send("print-pdf");
+});</code></pre>
+                    <h5>主进程 (C#)</h5>
+                    <pre><code class="csharp">Electron.IpcMain.On("print-pdf", async (args) => {
+    BrowserWindow mainWindow = Electron.WindowManager.BrowserWindows.First();
+
+    var saveOptions = new SaveDialogOptions
+    {
+        Title = "Save an PDF-File",
+        DefaultPath = await Electron.App.GetPathAsync(PathName.documents),
+        Filters = new FileFilter[] 
+        {
+            new FileFilter { Name = "PDF", Extensions = new string[] { "pdf" } }
+        }
+    };
+    var path = await Electron.Dialog.ShowSaveDialogAsync(mainWindow, saveOptions);
+
+    if (await mainWindow.WebContents.PrintToPDFAsync(path))
+    {
+        await Electron.Shell.OpenExternalAsync("file://" + path);
+    }
+    else
+    {
+        Electron.Dialog.ShowErrorBox("Error", "Failed to create pdf file.");
+    }
+});</code></pre>
+
+                    <div class="demo-protip">
+                        <h2>高级技巧</h2>
+                        <strong>使用打印样式表.</strong>
+                        <p>您可以创建打印目标的样式表, 以优化用户打印的外观. 下面是在这个应用程序中使用的样式表, 位于 <code>assets/css/print.css</code> 中.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            (function () {
+                const { ipcRenderer } = require("electron");
+
+                document.getElementById("print-pdf").addEventListener("click", () => {
+                    ipcRenderer.send("print-pdf");
+                });
+            }());
+        </script>
+
+    </section>
+</template>
