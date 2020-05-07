@@ -5,8 +5,6 @@
   当然, 它也是由 Electron 构建的. 此应用程序适用于 Windows, macOS 和 Linux 操作系统.
   
 使用此应用程序查看如何使用Electron.NET，并使用源代码学习如何创建基本的Electron.NET应用程序。
-  
-此基于Electron演示的[Electron API Demos](https://github.com/electron/electron-api-demos)  应用程序
 
 ![Image of Electron.NET API Demos App](https://cloud.githubusercontent.com/assets/378023/15016148/ae06cc80-124a-11e6-80dd-076d83e492f6.png)
 
