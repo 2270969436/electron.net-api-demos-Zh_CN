@@ -41,6 +41,6 @@ $ electronize start
 > Electron API 示例
 >* 英文版：[Electron（Github）](https://github.com/electron/electron-api-demos)
 >* 中文版：[Electron API 示例（Github）](https://github.com/demopark/electron-api-demos-Zh_CN)
->*中文版：[Electron API 示例 (Gitee)](https://gitee.com/shiyulanxuan/electron-api-demos-Zh_CN)(克隆自Github，[翻译者：demopark](https://github.com/demopark))
+>* 中文版：[Electron API 示例 (Gitee)](https://gitee.com/shiyulanxuan/electron-api-demos-Zh_CN)(克隆自Github，[翻译者：demopark](https://github.com/demopark))
 
 **Enjoy!**
