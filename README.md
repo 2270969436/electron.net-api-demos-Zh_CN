@@ -84,7 +84,10 @@ electronize start
 ```
 
 ### 注意
-> 第一次启动Electron会比较慢，后续启动会比第一次快很多。
+> 1.第一次启动Electron会比较慢，后续启动会比第一次快很多。
+> 2.倘若程序启动失败，请检查项目的“[electron.manifest.json](https://gitee.com/shiyulanxuan/electron.net-api-demos-Zh_CN/blob/master/electron.manifest.json)”文件“[executable](https://gitee.com/shiyulanxuan/electron.net-api-demos-Zh_CN/blob/master/electron.manifest.json#L2)”节点使用的名称是否与项目输出的exe文件名称（一般改成ASP.NET Core项目名称即可）一样
+> 3.使用“Electrtonize init”命令后会在项目根目录生成“[electron.manifest.json](https://gitee.com/shiyulanxuan/electron.net-api-demos-Zh_CN/blob/master/electron.manifest.json)”文件，启动程序时一般会自动将此文件复制到[ASP.NET Core 程序目录](https://gitee.com/shiyulanxuan/electron.net-api-demos-Zh_CN/tree/master/ElectronNET-API-Demos-Zh_CN)，倘若ASP.NET Core 项目 里面不存在此文件，请将根目录的“electron.manifest.json”文件复制到[ASP.NET Core 程序目录](https://gitee.com/shiyulanxuan/electron.net-api-demos-Zh_CN/tree/master/ElectronNET-API-Demos-Zh_CN)。
+![electron.manifest.json文件配置](https://s1.ax1x.com/2020/05/08/YnYamn.png "electron.manifest.json文件配置")
 
 ## 🔭 使用文件监视程序开发Electron.NET应用
 
